@@ -1,0 +1,18 @@
+Node* pairWiseSwap(struct Node* head) {
+    if(head==NULL || head->next==NULL)
+        return head;
+    Node *prev = head, *current = prev->next;
+    head = current;
+    while(1){
+        Node *next = current->next;
+        current->next = prev;
+        if(next==NULL || next->next==NULL){
+            prev->next = next;
+            break;
+        }
+        prev->next=next->next;
+        prev = next;
+        current = prev->next ;
+    }
+    return head;
+}
