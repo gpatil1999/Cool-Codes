@@ -1,0 +1,40 @@
+struct stacknode{
+        int data;
+        stacknode* next;
+    
+};
+
+void push(stacknode **root, int val){
+    stacknode *newnode = new stacknode();
+    newnode->data = val;
+    newnode->next = *root;
+    *root = newnode;
+    return;
+}
+bool pop(stacknode **root){
+    if(*root == NULL)
+        return false;
+    stacknode *temp = *root;
+    *root = (*root)->next;
+    delete(temp);
+    return true;
+}
+
+bool isempty(stacknode **root){
+    if((*root) == NULL)
+        return true;
+    return false;    
+}
+
+int top(stacknode **root){
+    if(*root ==NULL)
+        return INT_MIN;
+    return (*root)->data;     
+}
+int main()
+{
+    
+    stacknode *s=NULL;
+     push(&s,23);
+     return 0;
+}
