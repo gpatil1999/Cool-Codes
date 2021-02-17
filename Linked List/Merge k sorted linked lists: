@@ -1,0 +1,22 @@
+Node *merge(Node *a, Node *b){
+    if(a==NULL)
+        return b;
+    if(b==NULL)
+        return a;
+    if(a->data <= b->data){
+        a->next = merge(a->next, b);
+        return a;
+    } 
+    else{
+        b->next = merge(a, b->next);
+        return b;
+    }    
+}
+Node *mergeKLists(Node *arr[], int N)
+{
+    Node *head = arr[0];
+    for(int i=1;i<N; i++){
+        head = merge(head,arr[i]);
+    }
+    return head;
+}
