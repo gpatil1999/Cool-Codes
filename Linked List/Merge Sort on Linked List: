@@ -1,0 +1,36 @@
+Node *merge(Node *a, Node *b){
+    if(a==NULL)
+        return b;
+    if(b==NULL)
+        return a;
+    if(a->data <= b->data){
+        a->next = merge(a->next, b);
+        return a;
+    }
+    else {
+        b->next = merge(a, b->next);
+        return b;
+    }
+}
+Node *split(Node *head)  
+{  
+    Node *fast = head,*slow = head;  
+    while (fast->next && fast->next->next)  
+    {  
+        fast = fast->next->next;  
+        slow = slow->next;  
+    }  
+    Node *temp = slow->next;  
+    slow->next = NULL;  
+    return temp;  
+}  
+Node* mergeSort(Node* head) {
+    if (!head || !head->next)  
+        return head;  
+    Node *second = split(head);  
+  
+    head = mergeSort(head);  
+    second = mergeSort(second);  
+  
+    return merge(head,second);  
+}
