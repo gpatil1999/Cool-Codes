@@ -1,0 +1,7 @@
+Implement stack  using deque:
+ 
+Deque<int> mydeque;
+-	push_back(x) ;
+-	push_front(x);
+-	pop_back();
+-	pop_front();
