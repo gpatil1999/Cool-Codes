@@ -1,0 +1,54 @@
+/*
+The structure of the class is as follows
+class _stack{
+stack<int> s;
+int minEle;
+public :
+    int getMin();
+    int pop();
+    void push(int);
+};
+*/
+/*returns min element from stack*/
+int _stack :: getMin()
+{
+    if(!s.empty())
+        return minEle;
+    return -1;    
+}
+
+/*returns poped element from stack*/
+int _stack ::pop()
+{
+    if(s.empty())
+        return -1;
+    
+    int t = s.top();
+    s.pop();
+    
+    if(t<minEle){
+        int actual_min = minEle;
+        minEle = 2*minEle - t;
+        return actual_min;
+    }  
+    else
+        return t;
+}
+
+/*push element x into the stack*/
+void _stack::push(int x)
+{
+    if(s.empty()){
+        s.push(x);
+        minEle = x;
+    }
+    else{
+        if(x<minEle){
+            s.push(2*x-minEle);
+            minEle = x;
+        }
+        else
+            s.push(x);
+    }
+    return;
+}
