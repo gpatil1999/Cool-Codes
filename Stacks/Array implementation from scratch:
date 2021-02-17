@@ -1,0 +1,49 @@
+#define max 1000
+class Stack{
+        int top;
+    public:
+        int arr[max];
+        Stack(){
+            top = -1;
+        }
+        bool push(int x){
+            if(top==max-1){
+                cout<<" Stack overflow"<<endl;
+                return false;
+            }
+            else{
+                top++;
+                arr[top] = x;
+                return true;
+            }
+        }
+        bool pop(){
+            if(top==-1){
+                cout<<" Stack underflow"<<endl;
+                return false;
+            }
+            else{
+                top--;
+            }
+        }
+        int peek(){
+            if(top==-1){
+                cout<<"Stack EMpty"<<endl;
+                return -1;
+            }
+            else{
+                return arr[top];
+            }
+        }
+        bool isempty(){
+            if(top==-1)
+                return true;
+            else return false;    
+        }
+    
+};
+int main(){
+	Stack s;
+	s.push(6);  //use the stack according to usage
+	return 0; 
+}
