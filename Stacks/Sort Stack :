@@ -1,0 +1,52 @@
+//I. Recursive
+class SortedStack{
+public:
+	stack<int> s;
+	void sort();
+};
+void merge(int ele, stack<int> &s){
+    if(s.empty() || s.top()< ele){
+        s.push(ele);
+        return;
+    }
+    int temp = s.top();
+    s.pop();
+    merge(ele, s);
+    s.push(temp);
+    return;
+}
+void SortedStack :: sort()
+{
+    if(s.empty())  
+        return;
+    int temp = s.top();
+    s.pop();
+    sort();
+    merge(temp, s);
+    return;
+}
+
+//II. Iterative
+stack<int> sortStack(stack<int> &input) 
+{ 
+    stack<int> tmpStack; 
+    while (!input.empty()) 
+    { 
+        // pop out the first element 
+        int tmp = input.top(); 
+        input.pop(); 
+  
+        // while temporary stack is not empty and top 
+        // of stack is greater than temp 
+        while (!tmpStack.empty() && tmpStack.top() > tmp) 
+        { 
+            // pop from temporary stack and push 
+            // it to the input stack 
+            input.push(tmpStack.top()); 
+            tmpStack.pop(); 
+        } 
+        // push temp in tempory of stack 
+        tmpStack.push(tmp); 
+    }
+    return tmpStack; 
+} 
