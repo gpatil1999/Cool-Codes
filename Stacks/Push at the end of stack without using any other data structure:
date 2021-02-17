@@ -1,0 +1,23 @@
+void pushend(stack<int>* s, int x){
+    if((*s).empty()){
+        (*s).push(x);
+        return;
+    }
+    int a = (*s).top();
+    (*s).pop();
+    pushend(s, x);
+    (*s).push(a);
+    return;
+}
+
+int main()
+{
+    stack<int> s;
+    s.push(5);s.push(5);s.push(5);s.push(5);s.push(5);s.push(5);
+    pushend(&s, 10);                
+    while(!s.empty()){
+        cout<<s.top()<<" ";
+        s.pop();
+    }
+    return 0;
+}
