@@ -1,0 +1,24 @@
+int next_open=0,n; cin>>n;
+	    string str; cin>> str;
+	    vector<int> open_brackets;
+	    int balance=0, swaps=0;
+	    for(int i=0;i<n;i++){
+	        if(str[i]=='[')
+	            open_brackets.push_back(i);
+	    }
+	    for(int i=0;i<n;i++){
+	        if(str[i]=='['){
+	            balance++;
+	            next_open++;
+	        }
+	        else{
+	            balance--;
+	            if(balance<0){
+	                swaps=swaps+(open_brackets[next_open]-i);
+	                swap(str[open_brackets[next_open]],str[i]);
+	                next_open++;
+	                balance=1;
+	            }
+	        }
+	    }
+	    cout<<swaps<<endl;
