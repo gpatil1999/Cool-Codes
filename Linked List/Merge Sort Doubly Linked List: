@@ -1,0 +1,20 @@
+//mergesort and split functions same as Merge Sort Linked List
+// only merge function is changed
+Node *merge(Node *a, Node *b){
+    if(!a)
+        return b;
+    if(!b)
+        return a;
+    if(a->data <= b->data){
+        a->next = merge(a->next, b);
+        a->next->prev = a;
+        a->prev = NULL;
+        return a;
+    }
+    else{
+        b->next = merge(a, b->next);
+        b->next->prev = b;
+        b->prev = NULL;
+        return b;
+    }
+}
