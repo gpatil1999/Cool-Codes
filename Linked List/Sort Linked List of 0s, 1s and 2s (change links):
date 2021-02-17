@@ -1,0 +1,30 @@
+Node* segregate(Node *head) {
+    Node *zhead = new Node(0), *ohead = new Node(0), *thead = new Node(0);
+    Node *zero = zhead, *one = ohead, *two = thead, *current = head;
+    while(current!=NULL){
+        if(current->data ==0){
+            zero->next = current;
+            zero = current;
+            current = current->next;
+        }		
+        else if(current->data ==1){
+            one->next = current;
+            one = current;
+            current = current->next;
+        }
+        else{
+            two->next = current;
+            two = current;
+            current = current->next;
+        }
+    }
+    if(ohead->next!=NULL)
+        zero->next = ohead->next;
+    else
+        zero->next = thead->next;
+    one->next = thead->next;
+    two->next = NULL;
+    head = zhead->next;
+    delete(zhead);delete(ohead);delete(thead);
+    return head;
+} 		//Adding 0s nodes at start and 2s nodes at end is also an approach
