@@ -1,0 +1,19 @@
+string countAndSay(int n) {
+        string newstr, str ="1";
+        if(n==1)
+            return str;
+        for(int i=1;i<n;i++){
+            int count=1;
+            for(int j=0;j<str.length();j++){
+                if(j<str.length()-1&&str[j]==str[j+1])
+                    count++;
+                else{
+                    newstr.push_back(count+'0');
+                    newstr.push_back(str[j]);
+                    count=1;
+                }
+            }
+            str=newstr;newstr="";
+        }
+        return str;
+    }
