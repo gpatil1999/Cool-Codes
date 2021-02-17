@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+	int t; cin>>t;
+	while(t--){
+	    int n; cin>>n;
+	    vector<int> arr(n);
+	    for(int i=0;i<n;i++){
+	        cin>>arr[i];
+	    }
+	    int pos=-1;
+	    for(int i=n-1;i>0;i--){
+	        if(arr[i]>arr[i-1]){
+	            pos=i-1;
+	            break;
+	        }
+	    }
+	    if(pos==-1){
+	        for(int i=n-1;i>=0;i--)
+	            cout<<arr[i]<<" ";
+	        cout<<endl;     
+	        break;     
+	    }
+	    for(int i=n-1;i>pos;i--){
+	        if(arr[i]>arr[pos]){
+	            swap(arr[i],arr[pos]);
+	            sort(arr.begin()+pos+1,arr.end());
+	            break;
+	        }
+	    }
+	    for(int i=0;i<n;i++)
+	            cout<<arr[i]<<" ";
+	            
+	    cout<<endl;
+	}
+	return 0;
+}
