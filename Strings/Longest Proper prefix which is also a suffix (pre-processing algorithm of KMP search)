@@ -1,0 +1,23 @@
+int lps(string s)
+	{
+	    int n = s.length();
+	    int lp[n];
+	    lp[0]=0;
+	    int len=0,i=1;
+	    while(i<n){
+	        if(s[i]==s[len]){
+	            lp[i]=len+1;
+	            len++;
+	            i++;
+	        }
+	        else{
+	            if(len!=0){
+	                len = lp[len-1];
+	            }
+	            else{
+	                lp[i]=0;
+	                i++;
+	            }
+	        }
+	    }
+	    return lp[n-1];
