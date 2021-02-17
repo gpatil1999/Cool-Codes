@@ -1,0 +1,21 @@
+bool stackPermutation(int in[],int out[], int n)
+{
+    stack<int> s;
+    int i=0,j=0;
+    while(i<n){
+        if(in[i]==out[j]){
+            i++; j++;
+            while(!s.empty() && i<n && s.top()==out[j]){
+                s.pop();
+                j++;
+            }
+        }
+        else{
+            s.push(in[i]);
+            i++;
+        }    
+    }
+    if(s.empty())
+        return true;
+    return false;    
+}
