@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	vector<int> arr1{1, 12, 15, 26, 38},arr2{2, 13, 17, 30, 45};
+	int n=arr1.size();
+    int mid1=-1,mid2=-1,i=0,j=0;
+    while(i+j+2<=n){
+        
+        if(arr1[i]<=arr2[j]){
+            mid1=mid2;
+            i++;
+            mid2=arr1[i];
+        }
+        else{
+            mid1=mid2;
+            j++;
+            mid2=arr2[j];
+        }
+    }
+    cout<<mid1<<" "<<mid2<<" "<<(mid1+mid2)/2;    
+	
+	return 0;
+}
+
