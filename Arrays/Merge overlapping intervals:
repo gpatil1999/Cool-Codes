@@ -1,0 +1,22 @@
+bool myfunc(pair<int,int> a, pair<int,int> b){
+    return (a.first<=b.first);
+}
+vector<pair<int,int>> overlappedInterval(vector<pair<int,int>> vec, int n) {
+    sort(vec.begin(), vec.end(), myfunc);
+    vector<pair<int, int> > res;
+    res.push_back(vec[0]);
+    int j=0;
+    for(int i=1; i<n; i++){
+        if(vec[j].second>=vec[i].first){
+            vec[j].first = min(vec[j].first, vec[i].first);
+            vec[j].second = max(vec[j].second, vec[i].second);
+        }
+        else{
+            j++;
+            vec[j] = vec[i];
+        }
+    }
+    while(j!=vec.size()-1)
+        vec.pop_back();
+    return vec;    
+}
