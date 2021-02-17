@@ -1,0 +1,17 @@
+vector<string> generate(int N)
+{
+	vector<string> v;
+	queue<string> q;
+	
+	q.push("1");
+
+	while(v.size()!=N){
+	    string s = q.front();
+	    q.pop();
+	    v.push_back(s);
+	    q.push(s+"0");
+        q.push(s+"1");
+	}
+	return v;
+}
+
