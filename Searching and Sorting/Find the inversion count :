@@ -1,0 +1,39 @@
+typedef long long ll;
+
+ll merge(ll arr[], ll left,ll mid, ll right){
+    ll temp[right-left+1];
+    ll i=left, j=mid+1, k=0, inv =0;
+    while(i<=mid && j<=right){
+        if(arr[i]<=arr[j])
+            temp[k++]=arr[i++];
+        else{
+            inv+=(mid-i+1);
+            temp[k++]=arr[j++];
+        }    
+    }
+    while(i<=mid){
+        temp[k++]=arr[i++];
+    }
+    while(j<=right){
+        temp[k++]=arr[j++];
+    }
+    for(int i=left, k=0;i<=right; i++, k++){
+        arr[i]=temp[k];
+    }
+    return inv;
+}
+ll mergesort(ll arr[], ll left, ll right){
+    ll inv =0, mid;
+    if(left<right){
+        mid = left + (right-left)/2;
+        inv+= mergesort(arr,left,mid);
+        inv+= mergesort(arr,mid+1,right);
+        inv+= merge(arr,left,mid,right);
+    }
+    return inv;
+}
+long long int inversionCount(long long arr[], long long N)
+{
+    long long inv = mergesort(arr, 0, N-1);
+    return inv;
+}
