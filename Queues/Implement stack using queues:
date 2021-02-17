@@ -1,0 +1,32 @@
+class QueueStack{
+private:
+    queue<int> q1;
+    queue<int> q2;
+public:
+    void push(int);
+    int pop();
+};
+ */
+
+void QueueStack :: push(int x)
+{
+    q1.push(x);
+}
+
+int QueueStack :: pop()
+{
+    int ele =-1;
+    if(q1.empty())
+        return ele;
+    while(q1.size()!=1){
+        q2.push(q1.front());
+        q1.pop();
+    }    
+    ele = q1.front();
+    q1.pop();
+    queue<int> q;
+    q=q1;
+    q1=q2;
+    q2=q;
+    return ele;
+}
