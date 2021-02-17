@@ -1,0 +1,13 @@
+string s; cin>>s;
+	    int n=s.length(),flips=0;
+	    //1st case:- pattern starting with 0
+	    //we are just counting misplaced digits
+	    for(int i=0;i<n;i++){
+	        if(i%2==0&&s[i]=='1')
+	            flips++;
+	        else if(i%2!=0&&s[i]=='0')
+	            flips++;
+	    }
+	    //2nd case is pattern starting with 1
+	    //it's flips would be total - previous flips
+	    cout<< min(flips, n-flips)<<endl;
