@@ -1,0 +1,31 @@
+vector<vector<int>> threeSum(vector<int>& nums) {
+        int n=nums.size();
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> ans;
+        vector<int> v;
+        for(int i=0;i<n-2;i++){
+            int mid=i+1,right=n-1;
+            if(i>0&&nums[i]==nums[i-1])
+                continue;
+            while(mid<right){
+                int sum = nums[i]+nums[mid]+nums[right];
+                if(sum==0){
+                    v.push_back(nums[i]);
+                    v.push_back(nums[mid]);
+                    v.push_back(nums[right]);
+                    ans.push_back(v);
+                    v.clear();
+                    mid++;
+                    right--;
+                    continue;
+                }
+                else if(sum<0){
+                    mid++;
+                }
+                else{
+                    right--;
+                }
+            }
+        }
+        return ans;
+    }
