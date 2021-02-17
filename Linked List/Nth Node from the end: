@@ -1,0 +1,16 @@
+int getNthFromLast(Node *head, int n)
+{
+       Node *ahead = head, *behind = head;
+       int count=0;
+       while(count<n){
+            if(ahead==NULL)
+                return -1;
+            ahead = ahead->next;
+            count++;
+       }
+       while(ahead!=NULL){
+           ahead=ahead->next;
+           behind = behind->next;
+       }
+       return behind->data;
+}
