@@ -1,0 +1,23 @@
+I.   int lcs(int x, int y, string s1, string s2){
+    if(x==0||y==0)
+        return 0;
+    if(s1[x-1]==s2[y-1])                   //Recursive approach (it has drawbacks of overlapping subproblems)
+        return 1+lcs(x-1,y-1, s1, s2);
+    else 
+        return max(lcs(x,y-1,s1,s2),lcs(x-1,y,s1,s2));
+}
+
+II.  int lcs(int x, int y, string s1, string s2){
+    int L[x+1][y+1];
+    for(int i=0;i<=x;i++){
+        for(int j=0;j<=y;j++){
+            if(i==0||j==0)
+                L[i][j]=0;
+            else if(s1[i-1]==s2[j-1])               //using dp….Less time complexity
+                L[i][j]=1+L[i-1][j-1];
+            else
+                L[i][j]=max(L[i-1][j], L[i][j-1]);
+        }
+    }
+    return L[x][y];
+}
