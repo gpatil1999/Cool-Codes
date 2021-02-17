@@ -1,0 +1,20 @@
+queue<int> q;
+	    for(int i=0; i<k ;i++){
+	        if(v[i]<0)
+	            q.push(i);
+	    } 
+	    if(q.empty())
+	        cout<<0<<" ";
+	    else cout<<v[q.front()]<<" ";
+	    
+	    for(int i=1, j=k; j<n; i++,j++){
+	        if(!q.empty() && q.front()<i)
+	            q.pop();
+	        
+	        if(v[j]<0)
+	            q.push(j);
+	        if(q.empty())
+	            cout<<0<<" ";
+	        else cout<<v[q.front()]<<" ";     
+	    }
+	    cout<<endl;
