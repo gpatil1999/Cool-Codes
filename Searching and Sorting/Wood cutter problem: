@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int findwood(vector<int> arr, int height){
+	int n = arr.size(), collected = 0;
+	for(int i=n-1;i>=0;i--){
+		if(arr[i]<=height)
+			break;
+		collected+=(arr[i]-height);
+	}
+	return collected;
+}
+int main() {
+	
+	int n,m; cin>>n>>m;
+	vector<int> arr(n);
+	for(int i=0; i<n; i++){
+		cin>>arr[i];
+	}
+	sort(arr.begin(),arr.end());
+	int low = 0, high = arr[n-1];
+	while(low<=high){
+		int mid = low + (high-low)/2;
+		int collected = findwood(arr,mid);
+		if(collected==m)
+			{cout<<mid<<endl; return 0;}
+		else if(collected<m)
+			high = mid-1;
+		else low = mid+1;	
+			
+	}
+	cout<<-1<<endl;
+	return 0;
+}
