@@ -1,0 +1,20 @@
+int evalRPN(vector<string>& S) {
+        stack<int> st;
+    for(int i=0; i< S.size(); i++){
+        if(S[i]!="+" && S[i]!="-"&& S[i]!="*" && S[i]!="/")
+            st.push(stoi(S[i]));
+        else{
+            int num2 = st.top(); st.pop();
+            int num1 = st.top(); st.pop();
+            if(S[i]=="+")
+                st.push(num1+num2);
+            else if(S[i]=="-")
+                st.push(num1-num2);
+            else if(S[i]=="*")
+                st.push(num1*num2);
+            else if(S[i]=="/")
+                st.push(num1/num2);    
+        }    
+    }
+    return st.top();
+    }
