@@ -1,0 +1,20 @@
+void printme(int index, string str, string newstr){
+    if(newstr.length()>0)
+        cout<<newstr<<endl;
+    if(index==str.length())
+        return;
+    
+    for(int i=index;i<str.length();i++){
+        newstr.push_back(str[i]);
+        printme(i+1,str,newstr);
+        newstr.pop_back();
+    }
+    return;
+}
+
+int main() {
+	string str="abcd",newstr="";
+	printme(0,str,newstr);
+	
+	return 0;
+}
