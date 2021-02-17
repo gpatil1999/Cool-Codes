@@ -1,0 +1,32 @@
+int main() {
+	int t; cin>>t;
+	while(t--){
+	    int n,k; cin>>n;
+	    vector<int> arr(n);
+	    for(int i=0;i<n;i++){
+	        cin>>arr[i];
+	    }
+	    cin>>k;
+	    int window=0;
+	    for(int i=0;i<n;i++){
+	        if(arr[i]<=k)
+	            window++;
+	    }
+	    int blank=0;
+	    for(int i=0;i<window;i++){
+	        if(arr[i]>k)
+	            blank++;
+	    }
+	    
+	    int min_blank=blank;
+	    for(int i=0,j=window;j<n;i++,j++){
+	        if(arr[i]>k)
+	            blank--;
+	        if(arr[j]>k)
+	            blank++;
+	        min_blank=min(min_blank,blank);     
+	    }
+	    cout<<min_blank<<endl;
+	}
+	return 0;
+}
