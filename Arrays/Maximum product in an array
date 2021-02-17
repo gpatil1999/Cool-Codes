@@ -1,0 +1,14 @@
+long long maxProduct(int *arr, int n) {
+	    long long minpr=(long long)arr[0];
+	    long long maxpr=(long long)arr[0];
+	    long long max_product=(long long)arr[0];
+	    for(int i=1;i<n;i++){
+	        if(arr[i]<0)
+	            swap(minpr,maxpr);
+	       long long ele=(long long)arr[i];     
+	       maxpr=max(ele,ele*maxpr);
+	       minpr=min(ele,ele*minpr);
+	       max_product=max(maxpr,max_product);
+	    }
+	    return max_product;
+	}
