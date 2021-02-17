@@ -1,0 +1,25 @@
+int majorityElement(int a[], int size)
+{
+    int e, c=0, actual_c=0;
+    for(int i=0;i<size;i++){
+        if(c==0){
+            e = a[i];
+            c++;
+        }								Moore’s voting algorithm
+        else{
+            if(e==a[i])
+                c++;
+            else c--;    
+        }
+    }
+    if(c==0)
+        return -1;
+        
+    for(int i=0;i<size;i++){
+        if(a[i]==e)
+            actual_c++;
+    }
+    if(actual_c > size/2)
+        return e;
+    else return -1;    
+}
