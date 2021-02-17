@@ -1,0 +1,23 @@
+int intersectPoint(Node* head1, Node* head2)
+{
+    int M = size(head1),N = size(head2) ,pos=abs(N-M);
+    if(N>M){
+        while(pos){
+            head2 = head2->next;
+            pos--;
+        }
+    }
+    if(N<M){
+        while(pos){
+            head1 = head1->next;
+            pos--;
+        }
+    }
+    while(head1!=NULL){
+        if(head1==head2)
+            return head1->data;
+        head1= head1->next;
+        head2= head2->next;
+    }
+    return -1;
+}
