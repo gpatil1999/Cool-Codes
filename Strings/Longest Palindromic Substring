@@ -1,0 +1,27 @@
+string str; cin>>str;
+        int low,high,start=0,end=0,n=str.length(),max_length=1;
+        for(int i=1;i<n;i++){
+            low=i-1; high=i;
+            while(low>=0&&high<n&&str[low]==str[high]){
+                if(high-low+1>max_length){
+                    max_length=high-low+1;
+                    start=low;
+                    end=high;
+                }
+                low--; high++;
+            }
+            low=i-1;high=i+1;
+            while(low>=0&&high<n&&str[low]==str[high]){
+                if(high-low+1>max_length){
+                    max_length=high-low+1;
+                    start=low;
+                    end=high;
+                }
+                low--;high++;
+            }
+        }
+         for(int i=start;i<=end;i++){
+                cout<<str[i];
+            }
+            cout<<endl;
+    }
