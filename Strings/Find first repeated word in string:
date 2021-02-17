@@ -1,0 +1,17 @@
+string token,s="he had had he";
+	 stringstream mystream(s);
+	 unordered_map<string, int> m;
+	 while(getline(mystream, token, ' ')){
+	     if(m.find(token)!=m.end()){
+	         m[token]++;
+	     }
+	     else
+	        m[token]=1;
+	 }
+	 
+	 stringstream check(s);
+	 while(getline(check, token, ' ')){
+	     if(m[token]>1)
+	        cout<<token; 
+	        break;
+	 }
