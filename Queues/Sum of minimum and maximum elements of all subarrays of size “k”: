@@ -1,0 +1,33 @@
+vector<int> sumKSubarray(vector<int> arr, int k)
+{
+    vector<int> v;
+    deque<int> dqmax, dqmin;
+    for(int i=0; i<k; i++){
+        while(!dqmax.empty() && arr[dqmax.back()]<=arr[i])
+            dqmax.pop_back();
+        dqmax.push_back(i);
+        
+        while(!dqmin.empty() && arr[dqmin.back()>=arr[i]])
+            dqmin.pop_back();
+        dqmin.push_back(i);    
+    } v.push_back(dqmax.front() + dqmin.front());
+    
+    for(int i=1, j=k; j<arr.size(); i++, j++){
+        if(!dqmax.empty() && dqmax.front()<i)
+            dqmax.pop_front();
+        
+        if(!dqmin.empty() && dqmin.front()<i)
+            dqmin.pop_front();  
+        
+        while(!dqmax.empty() && arr[dqmax.back()]<=arr[j])
+            dqmax.pop_back();
+        dqmax.push_back(j);
+        
+        while(!dqmin.empty() && arr[dqmin.back()]>=arr[j])
+            dqmin.pop_back();
+        dqmin.push_back(j);
+        
+        v.push_back(arr[dqmax.front()] + arr[dqmin.front()]);
+    }
+    return v;
+}
