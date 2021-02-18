@@ -1,0 +1,58 @@
+Node *helper(Node *root){
+    if(root==NULL)
+        return NULL;
+    
+    if(root->left){
+        Node *left = helper(root->left);
+        
+        while(left->right)
+            left = left->right;
+            
+            left->right = root;
+            root->left = left;
+    }
+    
+    if(root->right){
+        Node *right = helper(root->right);
+        
+        while(right->left)
+            right = right->left;
+            
+        right->left = root;
+        root->right = right;
+    }
+    return root;
+}
+
+Node * bToDLL(Node *root)
+{
+    helper(root);
+    
+    while(root->left)
+        root=root->left;
+    return root;    
+}
+
+// Another Approach
+void BToDLL(Node* root, Node*& head) 
+{ 
+    // Base cases 
+    if (root == NULL) 
+        return; 
+  
+    // Recursively convert right subtree 
+    BToDLL(root->right, head); 
+  
+    // insert root into DLL 
+    root->right = head; 
+  
+    // Change left pointer of previous head 
+    if (head != NULL) 
+        head->left = root; 
+  
+    // Change head of Doubly linked list 
+    head = root; 
+  
+    // Recursively convert left subtree 
+    BToDLL(root->left, head); 
+} 
