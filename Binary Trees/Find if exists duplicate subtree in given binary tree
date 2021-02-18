@@ -1,0 +1,30 @@
+unordered_map<string,int> m;
+
+string treeSeq(Node *root){
+    if(root==NULL)
+        return "$";
+    
+    string s="";
+    if(!root->left && !root->right){
+        s = to_string(root->data);
+        return s;
+    }
+    
+    s+=treeSeq(root->left);
+    s+=treeSeq(root->right);
+    s+=to_string(root->data);-  
+    m[s]++;
+    return s;
+}
+
+bool dupSub(Node *root)
+{
+     m.clear();
+     treeSeq(root);
+     
+     for(auto x: m){
+         if(x.second>=2)
+            return true;
+     }
+     return false;
+}
