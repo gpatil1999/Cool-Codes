@@ -1,0 +1,35 @@
+vector <int> zigZagTraversal(Node* root)
+{
+	vector<int> v;
+	if(root==NULL)
+	    return v;
+	    
+    bool isleft = false;    
+	stack<Node*> s1, s2;
+	s1.push(root);
+	
+	while(!s1.empty()){
+	    isleft = !isleft;
+	    while(!s1.empty()){
+    	    Node *temp = s1.top();
+    	    s1.pop();
+    	    
+    	    v.push_back(temp->data);
+    	    
+    	    if(isleft){
+    	        if(temp->left)
+    	            s2.push(temp->left);
+    	        if(temp->right)
+    	            s2.push(temp->right);
+    	    }
+    	    else{
+    	        if(temp->right)
+    	            s2.push(temp->right);
+    	        if(temp->left)
+    	            s2.push(temp->left);     
+    	    }
+	    }
+	    swap(s1,s2);
+	}
+	return v;
+}
