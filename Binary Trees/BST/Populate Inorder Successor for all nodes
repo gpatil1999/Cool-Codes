@@ -1,0 +1,17 @@
+void rinorder(node *p, node *&next){
+    if(p==NULL)
+        return;
+        
+    rinorder(p->right, next);
+    p->next = next;
+    next = p;
+    rinorder(p->left,next);
+    return;
+}
+
+void populateNext(struct node* p)
+{
+    node *next = NULL;
+    rinorder(p, next);
+    return;
+}
