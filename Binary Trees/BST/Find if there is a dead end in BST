@@ -1,0 +1,19 @@
+//Method 1 : use map and find x-1 and x+1 in it, if found then there is a dead end
+//Method 2: use the concept of check whether binary tree is bst or not…..this is time if min==max, then there is a dead end :
+
+bool helper(Node *root,int min, int max){
+    if(root==NULL)
+        return false;
+    
+    if(min==max)
+        return true;
+    
+    return (helper(root->left,min,root->data-1) || helper(root->right,root->data+1,max));    
+    
+}
+bool isDeadEnd(Node *root)
+{
+    return helper(root, 1, INT_MAX);
+    
+}
+
