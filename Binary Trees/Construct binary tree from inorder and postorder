@@ -1,0 +1,26 @@
+Node *helpthebuilder(int in[], int post[], int &postind, int left, int right){
+    if(left>right)
+        return NULL;
+    
+    Node *temp = new Node(post[postind]);
+    postind--;
+    
+    if(left==right)
+        return temp;
+        
+    int inindex = right;
+    while(in[inindex]!=temp->data)
+        inindex--;
+    
+    temp->right = helpthebuilder(in, post, postind, inindex+1, right);
+    temp->left = helpthebuilder(in, post, postind, left, inindex-1);
+    
+    return temp;
+}
+
+Node *buildTree(int in[], int post[], int n) {
+    int postind = n-1;
+    
+    Node *root = helpthebuilder(in, post, postind, 0, n-1 );
+    return root;
+}
