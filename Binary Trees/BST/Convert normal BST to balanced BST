@@ -1,0 +1,31 @@
+void putinarr(TreeNode *root, vector<int> &arr){
+        if(root==NULL)
+            return;
+        
+        putinarr(root->left, arr);
+        arr.push_back(root->val);
+        putinarr(root->right, arr);
+        return;
+    }
+    
+    TreeNode *makebst(vector<int>&arr,int left, int right){
+        if(left>right)
+            return NULL;
+        
+        int mid = left + (right-left)/2;
+        TreeNode *temp = new TreeNode(arr[mid]);
+        
+        temp->left = makebst(arr,left,mid-1);
+        temp->right = makebst(arr,mid+1,right);
+        
+        return temp;
+    }
+    
+    TreeNode* balanceBST(TreeNode* root) {
+        vector<int> arr;
+        
+        putinarr(root,arr);
+        
+        root =  makebst(arr,0,arr.size()-1);
+        return root;
+    }
