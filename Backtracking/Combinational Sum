@@ -1,0 +1,27 @@
+void helper(vector<int> &A,vector<int> &v,vector<vector<int> >&ans,int index, int sum, int B){
+    if(sum>B)
+        return;
+    if(sum==B){
+        ans.push_back(v);
+        return;
+    }    
+    if(index==A.size())
+        return;
+    
+    for(int i=index; i<A.size(); i++){
+        if(i==index || A[i]!=A[i-1]){
+            v.push_back(A[i]);
+            helper(A,v,ans,i,sum+A[i],B);
+            v.pop_back();
+        }
+    }    
+    return ;
+}
+
+vector<vector<int> > combinationSum(vector<int> &A, int B) {
+    sort(A.begin(),A.end());
+    vector<vector<int> > ans;
+    vector<int> v;
+    helper(A,v,ans,0,0,B);
+    return ans;
+}
