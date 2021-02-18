@@ -1,0 +1,28 @@
+vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> v;
+        TreeNode *curr = root;
+        while(curr){
+            if(curr->left==NULL){
+                v.push_back(curr->val);
+                curr = curr->right;
+            }
+            else{
+                TreeNode *prev = curr->left;
+                while(prev->right && prev->right!=curr)
+                    prev = prev->right;
+                
+                if(prev->right==NULL){
+                    prev->right = curr;                         //v.push_back(curr->val)
+                    curr = curr->left;                           //for preorder traversal
+                }
+                else{
+                    prev->right = NULL;
+                    v.push_back(curr->val);		// do not process node here in pre order
+                    curr = curr->right;
+                }
+            }
+        }
+        return v;
+    }
+
+//can use this morris inorder traversal to find kth smallest in bst
