@@ -1,0 +1,31 @@
+int find(int in[],int num, int left, int right){
+    for(int i=left; i<=right; i++)
+        if(in[i]==num)
+            return i;
+}
+
+Node *helpthebuilder(int in[], int pre[],int &preindex, int left, int right){
+    
+    if(left>right)
+        return NULL;
+    
+    Node *temp = new Node(pre[preindex]);
+    preindex++;
+    
+    if(left==right)
+        return temp;
+    
+    int inindex = find(in,temp->data, left, right);  //efficient approach: use map and store all
+                                                                                     //<value,index> of inorder
+    temp->left = helpthebuilder(in, pre,preindex, left, inindex-1);
+    temp->right = helpthebuilder(in, pre, preindex,inindex+1, right);
+    
+    return temp;
+}
+
+Node* buildTree(int in[],int pre[], int n)
+{
+    int preindex = 0;
+    Node *root = helpthebuilder(in, pre,preindex, 0, n-1);
+    return root;
+}
