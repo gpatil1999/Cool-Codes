@@ -1,0 +1,24 @@
+Node *treeFromString(string str){
+    
+    stack<Node*> s;				//not sure if this approach works, feel free to verify and inform me
+    Node *root=NULL, *temp = NULL;
+    
+    for(int i=0; i<str.length(); i++){
+        if(str[i]!='(' && str[i]!=')'){
+            temp = new Node(str[i]-'0');
+            s.push(temp);
+            
+            if(i==0)
+                root = temp;
+        }
+        else if(str[i]==')'){
+            temp = s.top();
+            s.pop();
+            
+            if(!s.top()->left)
+                s.top()->left = temp;
+            else s.top()->right = temp;    
+        }
+    }
+    return root;
+}  
