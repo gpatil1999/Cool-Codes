@@ -1,0 +1,26 @@
+void helper(Node *root, int sum, int depth, int &maxdepth, int &ans){
+    if(root==NULL){
+        if(depth>maxdepth){
+            maxdepth = depth;
+            ans = sum;
+            return;
+        }
+        else if(depth==maxdepth){
+            ans = max(ans,sum);
+            return;
+        }
+        return;
+    }
+        
+    helper(root->left, sum+root->data, depth+1, maxdepth, ans);
+    helper(root->right, sum+root->data, depth+1, maxdepth, ans);
+    
+    return;
+}
+
+int sumOfLongRootToLeafPath(Node* root)
+{
+	int maxdepth = 0, ans=0;
+	helper(root, 0, 0, maxdepth, ans);
+	return ans;
+}
