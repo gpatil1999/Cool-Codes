@@ -1,0 +1,13 @@
+void printall(string &str, int index){
+    if(index>=str.size()){
+        cout<<str<<" ";
+        return;
+    }
+    
+    for(int i=index; i<str.size(); i++){
+        swap(str[i],str[index]);
+        printall(str,index+1);
+        swap(str[i],str[index]);
+    }
+    return ;
+}
