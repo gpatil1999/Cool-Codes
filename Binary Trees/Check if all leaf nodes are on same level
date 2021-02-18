@@ -1,0 +1,29 @@
+bool check(Node *root, int depth,int &depthfound){
+    if(root==NULL)
+        return true;
+    
+    if(!root->left && !root->right){
+        if(depthfound == 0){
+            depthfound = depth;
+            return true;
+        }
+        else if(depth!=depthfound)
+            return false;
+        return true;    
+    }
+    
+    if(!check(root->left, depth+1, depthfound))
+        return false;
+    
+    if(!check(root->right, depth+1, depthfound))
+        return false;    
+    
+    return true;    
+}
+
+bool check(Node *root)
+{
+    int depthfound = 0;
+     
+    return check(root, 0, depthfound);
+}
