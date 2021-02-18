@@ -1,0 +1,50 @@
+bool isSafe(int m[MAX][MAX],int n, int i,int j, int visited[MAX][MAX]){
+    if(i==-1 || i==n || j==-1 || j==n || m[i][j]==0 || visited[i][j]==1)
+        return false;
+    return true;    
+}
+
+void helper(int m[MAX][MAX],int n, int i,int j, int visited[MAX][MAX],string &s, vector<string> &v){
+    
+    if(i==n-1 && j==n-1){
+        v.push_back(s);
+        return;
+    }
+    
+    visited[i][j]=1;
+    
+    if(isSafe(m,n,i+1,j,visited)){
+        s.push_back('D');
+        helper(m,n,i+1,j,visited,s,v);
+        s.pop_back();
+    }
+    if(isSafe(m,n,i,j-1,visited)){
+        s.push_back('L');
+        helper(m,n,i,j-1,visited,s,v);
+        s.pop_back();
+    }
+    if(isSafe(m,n,i,j+1,visited)){
+        s.push_back('R');
+        helper(m,n,i,j+1,visited,s,v);
+        s.pop_back();
+    }
+    if(isSafe(m,n,i-1,j,visited)){
+        s.push_back('U');
+        helper(m,n,i-1,j,visited,s,v);
+        s.pop_back();
+    }
+    visited[i][j]=0;
+    return ;
+}
+
+vector<string> findPath(int m[MAX][MAX], int n) {
+    int visited[MAX][MAX] = {0};
+    string s="";
+    vector<string> v;
+    
+    if(m[0][0]==0)
+        return v;
+    
+    helper(m,n,0,0,visited,s, v);
+    return v;
+}
