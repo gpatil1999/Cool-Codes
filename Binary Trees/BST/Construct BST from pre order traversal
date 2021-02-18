@@ -1,0 +1,22 @@
+TreeNode *helpthebuilder(vector<int>& preorder, int &preind, int left, int right){
+        if(left>right)
+            return NULL;
+       
+        TreeNode *temp = new TreeNode(preorder[preind]);
+        preind++;
+        
+        int i;
+        for(i=left; i<=right; i++)
+            if(preorder[i]>temp->val)
+                break;
+        
+        temp->left = helpthebuilder(preorder, preind, preind,  i-1);
+        temp->right = helpthebuilder(preorder, preind,  i, right);
+        return temp;
+    }
+    
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        int preind = 0;
+        
+        return helpthebuilder(preorder, preind, 0, preorder.size()-1);
+    }
