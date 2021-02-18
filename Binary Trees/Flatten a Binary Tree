@@ -1,0 +1,19 @@
+void flatten(TreeNode* root) {
+        if(root==NULL)
+            return;
+        
+        flatten(root->left);
+        
+        TreeNode *temp = root->right, *curr = root;
+        
+            root->right = root->left;
+            root->left = NULL;
+            while(curr->right)
+                curr = curr->right;
+            
+            curr->right = temp;
+        
+        flatten(temp);
+        return;
+    }
+
