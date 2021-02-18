@@ -1,0 +1,19 @@
+int height(Node *root){
+    if(root==NULL)
+        return 0;					//utility function to calculate height
+     int lh = height(root->left);
+     int rh = height(root->right);
+     
+     return 1+ max(lh,rh);
+}
+int diameter(Node* root) {
+    if(root==NULL)
+        return 0;
+    
+    int ld = diameter(root->left);
+    int rd = diameter(root->right);
+    int lh = height(root->left);
+    int rh = height(root->right);
+    
+    return max(1+ lh+rh, max(ld,rd));
+}
