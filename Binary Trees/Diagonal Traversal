@@ -1,0 +1,23 @@
+void store(Node *root, map<int,vector<int>> &m, int d){
+    if(root==NULL)
+        return;
+    						//pre order traversal 
+    m[d].push_back(root->data);
+    store(root->left,m,d+1);
+    store(root->right,m,d);
+    return;
+}
+vector<int> diagonal(Node *root)
+{
+    vector<int> v;
+    map<int, vector<int> > m;
+    
+    store(root,m,0);
+    for (auto it :m)
+    {
+        vector<int> v1=it.second;
+        for(auto it:v1)
+          v.push_back(it);
+    }
+    return v;
+}
