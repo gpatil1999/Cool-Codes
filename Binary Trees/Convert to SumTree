@@ -1,0 +1,12 @@
+int toSumTree(Node *root){
+    if(root==NULL)
+        return 0;
+    
+    int oldval = root->data;
+    int sum=0;
+    sum+=toSumTree(root->left);
+    sum+=toSumTree(root->right);
+    
+    root->data = sum;
+    return root->data+oldval;
+}
