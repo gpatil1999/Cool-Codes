@@ -1,0 +1,41 @@
+//node values are from 1 to n 
+int findcount(Node *root){
+    if(root==NULL)
+        return 0;
+    
+    int lcount = findcount(root->left);
+    int rcount = findcount(root->right);
+    
+    return(1+lcount+rcount);
+}
+
+int kthAncestor(Node *root, int k, int node)
+{
+    int n = findcount(root);
+    int arr[n+1];
+    
+    arr[root->data] = -1;
+    queue<Node*> q;
+    q.push(root);
+    while(!q.empty()){
+        Node *temp = q.front();
+        q.pop();
+        
+        if(temp->left){
+            arr[temp->left->data] = temp->data;
+            q.push(temp->left);
+        }
+        if(temp->right){
+            arr[temp->right->data] = temp->data;
+            q.push(temp->right);
+        }
+    }
+    
+    while(node!=-1){
+        node = arr[node];
+        k--;
+        if(k==0)
+            break;
+    }
+    return node;
+}
