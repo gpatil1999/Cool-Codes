@@ -1,0 +1,12 @@
+int maxSumSubTree(Node *root, int &maxsum){
+    if(root==NULL)
+        return 0;
+    
+    int lsum = maxSumSubTree(root->left, maxsum);
+    int rsum = maxSumSubTree(root->right, maxsum);
+    int sum = root->data+lsum+rsum;
+    
+    maxsum = max(maxsum, sum);
+    
+    return sum;
+}
