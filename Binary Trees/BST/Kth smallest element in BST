@@ -1,0 +1,20 @@
+void helper(Node *root, int k, int &curr, int &ans){
+    if(root==NULL)
+        return;
+    
+    helper(root->left,k,curr,ans);
+    curr++;
+    if(k==curr)
+        ans = root->data;
+    helper(root->right,k,curr,ans);    
+}
+
+int KthSmallestElement(Node *root, int k)
+{
+    int curr=0, ans=-1;
+    helper(root, k, curr, ans);
+    return ans;
+}
+//this could also be done using morris in order traversal
+//this traversal is O(1) space (no recursion and no stack used)
+//use morris traversal
