@@ -1,0 +1,33 @@
+void helper(string A,  string aux, set<string> s,vector<string> &ans){
+    if(A.size()==0){
+        if(!aux.empty())
+        {
+            aux.erase(aux.begin()+aux.length()-1);
+        }
+        ans.push_back(aux);
+        return;
+    }
+    
+    for(int i=0; i<A.length(); i++){
+        string first = A.substr(0,i+1);
+        string second = A.substr(i+1);
+        if(s.find(first)!=s.end()){
+            string temp = aux;
+            aux = aux + first + " ";
+            helper(second,aux,s,ans);
+            aux = temp;
+        }
+    }
+}
+    
+
+vector<string> Solution::wordBreak(string A, vector<string> &B) {
+    
+    vector<string> ans;
+    set<string> s;
+    for(int i=0; i<B.size(); i++){
+        s.insert(B[i]);
+    }
+    helper(A,"",s,ans);
+    return ans;
+}
