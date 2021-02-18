@@ -1,0 +1,55 @@
+void insert(vector<vector<string>>&ans,vector<vector<int>>&board,int A){
+    vector<string> subans;
+    for(int i=0;i<A;i++){
+        string str="";
+        for(int j=0;j<A;j++){
+            if(board[i][j]==1)
+                str.push_back('Q');
+            else
+                str.push_back('.');
+        }
+        subans.push_back(str);
+    }
+    ans.push_back(subans);
+    return;
+}
+bool isSafe(vector<vector<int>>&board,int row,int col, int A){
+    for(int j=0;j<col;j++){
+        if(board[row][j]==1)
+            return false;
+    }
+    for(int i=row,j=col;i>=0&&j>=0;i--,j--){
+        if(board[i][j]==1)
+            return false;
+    }
+    for(int i=row,j=col;i<A&&j>=0;i++,j--){
+        if(board[i][j]==1)
+            return false;
+    }
+    return true;
+}
+void helpQueen(vector<vector<string>>&ans,vector<vector<int>>&board,int col,int A){
+    if(col>=A){
+        insert(ans,board,A);
+        return;
+    }
+    for(int i=0;i<A;i++){
+        if(isSafe(board,i,col,A)){
+            board[i][col]=1;
+            helpQueen(ans,board,col+1,A);
+            board[i][col]=0;
+        }
+    }
+}
+vector<vector<string> > Solution::solveNQueens(int A) {
+    vector<vector<int>> board(A,vector<int>(A,0));
+    vector<vector<string>> ans;
+    if(A==1){
+        vector<string> temp;temp.push_back("Q");
+        ans.push_back(temp);
+    }
+    if(A<4)
+        return ans;
+    helpQueen(ans,board,0,A);
+    return ans;
+}
