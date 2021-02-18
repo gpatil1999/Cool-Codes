@@ -1,0 +1,67 @@
+//method 1: put in array and find median
+//method 2: inorder traversal
+//method 3: morris traversal: 
+int countnodes(Node *root){
+    int count = 0;
+    
+    while(root){
+        if(root->left==NULL){
+            count++;
+            root=root->right;
+        }
+        else{
+            Node *temp = root->left;
+            while(temp->right && temp->right!=root)
+                temp = temp->right;
+            if(temp->right==NULL){
+                temp->right = root;
+                root = root->left;
+            }    
+            else{
+                count++;
+                temp->right =NULL;
+                root = root->right;
+            }
+        }
+    }
+    return count;
+}
+
+float findMedian(struct Node *root)
+{
+    int n = countnodes(root);
+    int pos = 0;
+    float ans;
+    Node *prev = NULL, *curr = root;
+    while(curr){
+        if(curr->left==NULL){
+            pos++;
+            if(n%2 && pos==(n+1)/2)
+                return curr->data;
+            if(n%2==0 && pos==(n/2)+1)
+                return (prev->data+curr->data)/2.0;
+            prev = curr;
+            curr=curr->right;
+        }
+        else{
+            Node *temp = curr->left;
+            while(temp->right && temp->right!=curr)
+                temp = temp->right;
+            if(temp->right==NULL){
+                temp->right = curr;
+                curr = curr->left;
+            }    
+            else{
+                pos++;
+                if(n%2 && pos==(n+1)/2)
+                    return curr->data;
+                if(n%2==0 && pos==(n/2)+1)
+                    return (prev->data+curr->data)/2.0;
+                
+                temp->right =NULL;
+                prev= curr;
+                curr = curr->right;
+            }
+        }
+    }
+}
