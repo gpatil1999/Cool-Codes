@@ -1,0 +1,21 @@
+Node *createTree(int parent[], int N)
+{
+    Node *arr[N];
+    Node *root=NULL;    
+    
+    for(int i=0; i<N; i++){
+        arr[i] = new Node(i);
+    }
+    
+    for(int i=0; i<N; i++){
+        if(parent[i]==-1)
+            root = arr[i];
+        else{    
+            if(!arr[parent[i]]->left)
+                arr[parent[i]]->left = arr[i];
+            else
+                arr[parent[i]]->right = arr[i];
+        }    
+    }
+    return root;
+}
