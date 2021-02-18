@@ -1,0 +1,35 @@
+void putinarr(Node *root, vector<int> &arr){
+    if(root==NULL)
+        return;
+    
+    putinarr(root->left,arr);
+    arr.push_back(root->data);
+    putinarr(root->right,arr);
+    
+    return;
+}
+
+void putintree(Node *root, vector<int> &arr, int &ind){
+    if(root==NULL)
+        return;
+    
+    putintree(root->left, arr, ind);
+    root->data = arr[ind];
+    ind++;
+    putintree(root->right, arr, ind);
+    
+    return;
+}
+
+Node *binaryTreeToBST (Node *root)
+{
+    vector<int> arr;
+    putinarr(root, arr);
+    
+    sort(arr.begin(), arr.end());
+    
+    int index =0 ;
+    putintree(root, arr, index);
+    
+    return root;
+}
