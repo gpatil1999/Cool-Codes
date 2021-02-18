@@ -1,0 +1,36 @@
+//Method 1 : Brute force, check for each element  O(n2)
+//Method 2 : BST :
+struct Node{
+    Node *left, *right;
+    int data;
+    
+    Node(int x){
+        data = x;
+        left = NULL; right = NULL;
+    }
+};
+
+void insert(Node *&root, int key, int &suc){
+    if(root==NULL){
+        root = new Node(key); return;}
+    
+    if(root->data < key){
+        insert(root->right, key, suc);
+    }    
+    else{
+        suc = root->data;
+        insert(root->left, key, suc);
+    }
+    return ;
+}
+
+void findandreplace(vector<int> &v){
+    Node *root = NULL;
+    
+    for(int i=v.size()-1; i>=0; i--){
+        int suc = -1;
+        insert(root,v[i], suc);
+        v[i] = suc;
+    }
+    return;
+}
