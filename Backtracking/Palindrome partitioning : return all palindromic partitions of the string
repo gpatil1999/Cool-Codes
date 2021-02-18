@@ -1,0 +1,32 @@
+bool isPalindrome(string A, int l, int r){
+    while(l<r){
+        if(A[l]!=A[r])
+            return false;
+        l++; r--;    
+    }
+    return true;
+}
+
+void helper(string A, vector<vector<string>>&ans,vector<string> &v, int index){
+    if(index==A.size()){
+        ans.push_back(v);
+        return;
+    }
+    
+    for(int i=index; i<A.size(); i++){
+        if(isPalindrome(A,index,i)){
+            v.push_back(A.substr(index,i-index+1));
+            helper(A,ans,v,i+1);
+            v.pop_back();
+        }
+    }
+    return;
+}
+
+vector<vector<string> > Solution::partition(string A) {
+    vector<vector<string>> ans;
+    vector<string> v;
+    
+    helper(A,ans,v,0);
+    return ans;
+}
